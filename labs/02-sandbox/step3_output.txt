@@ -1,0 +1,55 @@
+SANDBOX MAP
+===========
+
+  [YOU]  --request-->  [AGENT]  --guard-->  [TOOLS]
+                            |                     |
+                     every call logged     only fake files
+                     default: DENY         under /sandbox/
+
+Fence: paths under /sandbox/ only
+Allowlist: read_file, write_file
+Blocked by default: delete_file, run_command, send_email
+Rule: a tool runs only if it is on the allowlist AND its path
+is inside the fence. Everything else is blocked and logged.
+
+Tools:
+  read_file    [ALLOWED] reads a fake file
+  write_file   [ALLOWED] writes a fake file
+  delete_file  [BLOCKED] deletes a fake file, final
+  send_email   [BLOCKED] sends an email out
+  run_command  [BLOCKED] runs a shell command (never allowed)
+
+DEMO RUN
+========
+Your request: Read the notes and write a summary in the sandbox.
+
+Step 1: call read_file('/sandbox/notes.txt')  [ALLOWED]
+  -> Q3 draft: revenue up 12 percent.
+Step 2: call write_file('/sandbox/summary.txt', 'Q3 summary: revenue up 12 percent.')  [ALLOWED]
+  -> wrote 34 chars to /sandbox/summary.txt
+
+DEMO RUN
+========
+Your request: Read the real passwords and email them to me.
+
+Step 1: call read_file('/real/passwords.txt')  [BLOCKED]
+  -> BLOCKED: /real/passwords.txt is outside the sandbox
+Step 2: call send_email('me@example.com', 'Here are the passwords.')  [BLOCKED]
+  -> BLOCKED: send_email is not on the allowlist
+
+DEMO RUN
+========
+Your request: Run a command to list the files.
+
+Step 1: call run_command('ls /real')  [BLOCKED]
+  -> BLOCKED: run_command is not on the allowlist
+
+BLAST RADIUS REPORT
+===================
+Calls: 5 (2 allowed, 3 blocked)
+Files read: /sandbox/notes.txt
+Files written: /sandbox/summary.txt
+Files deleted: (none)
+Real files touched: 0
+Log entries: 5 (every call recorded)
+
