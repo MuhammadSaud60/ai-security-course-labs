@@ -12,6 +12,8 @@ key, all data fake.
 | 2 | Build your sandbox | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MuhammadSaud60/ai-security-course-labs/blob/main/notebooks/02-build-your-sandbox.ipynb) |
 | 3 | Direct injection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MuhammadSaud60/ai-security-course-labs/blob/main/notebooks/03-direct-injection.ipynb) |
 | 4 | Indirect injection, the EchoLeak case | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MuhammadSaud60/ai-security-course-labs/blob/main/notebooks/04-indirect-injection-echoleak.ipynb) |
+| 5 | Injection in the wild | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MuhammadSaud60/ai-security-course-labs/blob/main/notebooks/05-injection-in-the-wild.ipynb) |
+| 6 | Defenses that hold | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MuhammadSaud60/ai-security-course-labs/blob/main/notebooks/06-defenses-that-hold.ipynb) |
 
 More lessons land here as the course is built. The full course opens on
 logicstack.org all at once when complete.
