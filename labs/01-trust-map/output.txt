@@ -1,0 +1,52 @@
+TRUST BOUNDARY MAP
+==================
+
+  [YOU]  --request-->  [AGENT]  --tool calls-->  [TOOLS]
+                            |
+              reads: inbox, notes, docs
+              writes: public board, email
+
+Zones:
+  TRUSTED    : your request, docs you wrote and reviewed
+  UNTRUSTED  : anything a stranger could have written
+  PRIVATE    : data only you should see
+  PUBLIC     : anywhere strangers can read
+
+Tools:
+  read_inbox           reads: inbox           writes: -             tags: PRIVATE, UNTRUSTED
+  read_private_notes   reads: private notes   writes: -             tags: PRIVATE
+  read_team_docs       reads: team docs       writes: -             tags: none
+  post_to_board        reads: -               writes: public board  tags: EXFIL
+  send_email           reads: -               writes: email         tags: EXFIL
+
+DEMO RUN
+========
+Your request: Check my inbox and post a summary to the board.
+
+Step 1: call read_inbox  [tags: PRIVATE, UNTRUSTED]
+  -> ['boss@yourcompany.example: Q3 numbers', 'stranger@unknown.example: Quick favour', 'teammate@yourcompany.example: Lunch']
+Step 2: call post_to_board  [tags: EXFIL]
+  -> posted: Q3 summary posted.
+
+DANGER CHECK
+============
+Plan tools: read_inbox, post_to_board
+Legs covered: EXFIL, PRIVATE, UNTRUSTED
+VERDICT: DANGEROUS COMBINATION
+This plan reads untrusted content, touches private data,
+and can send data out. One bad instruction in the untrusted
+content could steer the private data to the public exit.
+
+DEMO RUN
+========
+Your request: Read the team docs.
+
+Step 1: call read_team_docs  [tags: none]
+  -> ['Q3 summary: revenue up 12 percent, churn down 2 points.']
+
+DANGER CHECK
+============
+Plan tools: read_team_docs
+Legs covered: (none)
+VERDICT: ok, missing leg(s): EXFIL, PRIVATE, UNTRUSTED
+
