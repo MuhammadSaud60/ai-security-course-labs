@@ -9,6 +9,7 @@ key, all data fake.
 | # | Lesson | Open in Colab |
 |---|--------|---------------|
 | 1 | Why agents fail differently | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MuhammadSaud60/ai-security-course-labs/blob/main/notebooks/01-why-agents-fail-differently.ipynb) |
+| 2 | Build your sandbox | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MuhammadSaud60/ai-security-course-labs/blob/main/notebooks/02-build-your-sandbox.ipynb) |
 
 More lessons land here as the course is built. The full course opens on
 logicstack.org all at once when complete.
